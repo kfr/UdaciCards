@@ -1,5 +1,5 @@
 export const ADD_DECK = 'ADD_DECK';
-export const RECIEVE_DECKS = 'RECIEVE_DECK';
+export const RECIEVE_DECKS = 'RECIEVE_DECKS';
 export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK';
 
 
@@ -11,6 +11,7 @@ export function addDeck(deck){
 }
 
 export function recieveDecks(decks){
+    console.log(decks)
     return {
         type: RECIEVE_DECKS,
         decks

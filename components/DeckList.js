@@ -1,23 +1,34 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Button} from 'react-native'
 import {initialData} from '../utils/api'
+import {connect} from 'react-redux'
+import {getDecks} from '../utils/api'
+import { recieveDecks } from '../actions/index';
 
 class DeckList extends React.Component {
-    render(){
-        const decklist = initialData();
+    
+    componentDidMount(){
+        getDecks().then(decks => this.props.receiveAllDecks(decks))
+    }
 
+    render(){
+        const {decks} = this.props;
+        
         return(
-        <View >{
-            Object.keys(decklist).map((deck) => {
-                const {title, questions} = decklist[deck]
+        
+        <View style={styles.container}>{
+            
+            Object.keys(decks).map((deck) => {
+                const {title, questions} = decks[deck]
                 return (
                     <View key={deck}>
                         <Text>{title}</Text>
                         <Text>{questions.length}</Text>
+                        <Button onPress={() => this.props.navigation.navigate('DeckView', {deckid: deck})} title='view deck'></Button>
                     </View>
                 )
-
-            })
+            }
+        )
         }
         </View>
         )
@@ -33,5 +44,17 @@ const styles = StyleSheet.create({
     },
   });
 
-export default DeckList
+function mapDispatchToProps(dispatch){
+    return {
+        receiveAllDecks: (decks) => dispatch(recieveDecks(decks))
+    }
+}
+
+function mapStateToProps(decks){
+      return {
+          decks
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
 

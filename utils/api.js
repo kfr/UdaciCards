@@ -1,15 +1,16 @@
 import { AsyncStorage } from "react-native"
+const KEY = 'decklist';
 
 export const initialData = () => {
     return initialDecklistData
 } 
 
-export function getDecks(deck) {
+export function getDecks() {
     return AsyncStorage.getItem(KEY)
     .then(results => {
         if(results === null){
-            AsyncStorage.setItem(KEY, JSON.stringify(initialData))
-            return initialData;
+            AsyncStorage.setItem(KEY, JSON.stringify(initialDecklistData))
+            return initialDecklistData;
         }else{
             return JSON.parse(results);
         }
