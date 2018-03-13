@@ -10,25 +10,28 @@ class NewDeck extends React.Component{
         text: 'Useless Placeholder'
     }
 
+    handleTitleChange = (event) =>{
+        this.setState({text: event});
+    }
+
     addDeck = () => {
-        const {text} = this.state.text
-        saveDeck(text)
-        this.props.dispatch(addDeck(text))
-        this.props.navigation.navigate('DeckView')
-        
+        saveDeck(this.state.text)
+        this.props.dispatch(addDeck(this.state.text))
+        this.props.navigation.navigate('DeckView', {entryId: this.state.text})
+        this.setState({text: ''})
     }
 
     render(){
         return (
             <View style={styles.container}>
-                <Text>
+                <Text style={styles.title}>
                     What is the new decks name?
                 </Text>
-                <TextInput style={{height: 40, width: 200, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({text})}
+                <TextInput style={style=styles.input}
+                    onChangeText={this.handleTitleChange}
                     value={this.state.text}
                 />
-                <Button onPress={this.addDeck} title='Add deck'></Button>
+                <Button style={styles.submitBtn} onPress={this.addDeck} title='Add deck'></Button>
             </View>
         )
     }
@@ -41,6 +44,26 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    input:{
+        width: 200,
+        height: 44,
+        padding: 8,
+        borderWidth: 1,
+        borderColor: '#757575',
+        margin: 50,
+        borderRadius: 8
+    },
+    title : {
+        fontSize: 30,
+        color: '#333'
+    },
+    submitBtn : {
+        borderWidth : 0.5,
+        borderColor: '#757575',
+        padding: 10,
+        borderRadius : 7,
+        overflow : 'hidden'
+    }
   });
 
-export default NewDeck
+export default connect()(NewDeck)

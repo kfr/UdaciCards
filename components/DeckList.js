@@ -20,11 +20,12 @@ class DeckList extends React.Component {
             
             Object.keys(decks).map((deck) => {
                 const {title, questions} = decks[deck]
+                
                 return (
                     <View key={deck}>
                         <Text>{title}</Text>
                         <Text>{questions.length}</Text>
-                        <Button onPress={() => this.props.navigation.navigate('DeckView', {deckid: deck})} title='view deck'></Button>
+                        <Button onPress={() => this.props.navigation.navigate('DeckView', {entryId: deck})} title='view deck'></Button>
                     </View>
                 )
             }

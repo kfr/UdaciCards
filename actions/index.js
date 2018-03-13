@@ -4,6 +4,7 @@ export const ADD_CARD_TO_DECK = 'ADD_CARD_TO_DECK';
 
 
 export function addDeck(deck){
+    console.log('action adddeck::' + deck)
     return {
         type: ADD_DECK,
         deck
@@ -11,7 +12,7 @@ export function addDeck(deck){
 }
 
 export function recieveDecks(decks){
-    console.log(decks)
+    //console.log(decks)
     return {
         type: RECIEVE_DECKS,
         decks
