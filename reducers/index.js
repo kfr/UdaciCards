@@ -24,7 +24,7 @@ function deck( state = {}, action){
             ...state,
             [deck] : {
                 ...state[deck],
-                questions : [...state[deck].questions, {questions, answer, correctAnswer}] 
+                questions : [...state[deck].questions, {question, answer, correctAnswer}] 
             }
         }
         default:

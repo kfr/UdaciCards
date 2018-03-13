@@ -12,7 +12,7 @@ export function addDeck(deck){
 }
 
 export function recieveDecks(decks){
-    //console.log(decks)
+    
     return {
         type: RECIEVE_DECKS,
         decks
@@ -20,6 +20,7 @@ export function recieveDecks(decks){
 }
 
 export function addCard(card){
+    console.log('Action addCard:: ' + card)
     return {
         type: ADD_CARD_TO_DECK,
         card

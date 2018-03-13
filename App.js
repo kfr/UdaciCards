@@ -4,12 +4,14 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import DeckView from './components/DeckView'
+import Quiz from './components/Quiz'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import {purple, white}  from './utils/colors'
 import { Constants } from 'expo'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { createStore } from 'redux'
+import AddCard from './components/AddCard'
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -65,6 +67,26 @@ const MainNavigator = StackNavigator({
     screen: DeckView,
     navigationOptions:{
       title: 'Deck info',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor : purple
+      }
+    }
+  },
+  AddCard:{
+    screen: AddCard,
+    navigationOptions:{
+      title: 'Add card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor : purple
+      }
+    }
+  },
+  Quiz:{
+    screen: Quiz,
+    navigationOptions:{
+      title: 'Start Quiz',
       headerTintColor: white,
       headerStyle: {
         backgroundColor : purple

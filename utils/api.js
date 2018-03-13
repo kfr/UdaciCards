@@ -27,6 +27,17 @@ export function saveDeck(title){
     }))
 }
 
+export function addCardToDeck(card){
+    console.log('addCardToDeck::' + card.deck)
+    return AsyncStorage.getItem(KEY)
+    .then(results => JSON.parse(results))
+    .then(results => {
+        results[card.deck].questions.push(card)
+        AsyncStorage.setItem(KEY, JSON.stringify(results))
+        return results 
+    })
+}
+
 const initialDecklistData = {
     Matematikk : {
         title: 'Matematikk',
