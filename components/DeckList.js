@@ -4,7 +4,7 @@ import {initialData} from '../utils/api'
 import {connect} from 'react-redux'
 import {getDecks} from '../utils/api'
 import { recieveDecks } from '../actions/index';
-import { orange, white } from '../utils/colors';
+import { gray, white } from '../utils/colors';
 
 class DeckList extends React.Component {
     
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: orange,
+        backgroundColor: gray,
         margin: 8,
         height: 200,
         borderRadius: 10,

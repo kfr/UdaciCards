@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { createStore } from 'redux'
 import AddCard from './components/AddCard'
+import {localNotification, schedulingOptions} from './utils/notifications'
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -97,6 +98,17 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  
+ async componentDidMount(){
+    let result = await   
+    Permissions.askAsync(Permissions.NOTIFICATIONS);
+    
+    if (Constants.lisDevice && resut.status === 'granted') {
+      console.log('Notification permissions granted.')
+      Notifications.scheduleLocalNotificationAsync(localNotification, schedulingOptions);
+    }
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
