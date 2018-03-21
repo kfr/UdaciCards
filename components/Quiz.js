@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavigationActions} from 'react-navigation'
-import {orange, white, purple, red, green, gray} from '../utils/colors'
+import {white, purple, red, green, gray} from '../utils/colors'
 import {connect} from 'react-redux'
 import {StyleSheet, View, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView, Animated } from 'react-native'
 import ToggleButton from './ToggleButton'
@@ -23,9 +23,10 @@ class Quiz extends React.Component{
         const deck = this.props.navigation.state.params.entryId
         const decks = this.props.decks
         const correct = decks[deck].questions[questionNumber].correctAnswer
-        console.log('correct:' + correct + ' answer: ' + answer)
-
-        if(answer === correct){
+        console.log('correct:' + typeof correct + ' answer: ' + typeof answer + " number of correct: " + this.state.correct)
+        
+        if(answer == correct){
+            console.log("answer is correct")
             this.setState({
                 correct: this.state.correct + 1
             })
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
-        backgroundColor: orange,
+        backgroundColor: gray,
         margin: 8,
         height: 200,
         borderRadius: 10,
