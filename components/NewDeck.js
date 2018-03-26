@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 class NewDeck extends React.Component{
     state = {
-        text: 'Useless Placeholder'
+        text: ''
     }
 
     handleTitleChange = (event) =>{

@@ -25,7 +25,7 @@ class Quiz extends React.Component{
         const correct = decks[deck].questions[questionNumber].correctAnswer
         console.log('correct:' + typeof correct + ' answer: ' + typeof answer + " number of correct: " + this.state.correct)
         
-        if(answer == correct){
+        if(answer === correct){
             console.log("answer is correct")
             this.setState({
                 correct: this.state.correct + 1

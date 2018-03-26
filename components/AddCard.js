@@ -9,9 +9,9 @@ import {StyleSheet, View, Text, Button, TextInput, TouchableOpacity, KeyboardAvo
 class AddCard extends React.Component{
     
     state = {
-        question: '5+2',
-        answer: '7',
-        correctAnswer:'7'
+        question: '',
+        answer: '',
+        correctAnswer:''
     }
     
     handleChangeQuestion = (event) => {
