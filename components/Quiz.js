@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {StyleSheet, View, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView, Animated } from 'react-native'
 import ToggleButton from './ToggleButton'
 import ActionButton from './ActionButton'
+import {clearNotifications, setLocaNotifications, clearLocalNotifcation} from '../utils/notifications'
 
 class Quiz extends React.Component{
     state = {
@@ -38,6 +39,11 @@ class Quiz extends React.Component{
             questionNumber: this.state.questionNumber + 1,
             showQuestion: false
         })
+
+        clearLocalNotifcation()
+            .then(
+                setLocaNotifications
+            )
 
         console.log(this.state.correct + ' ' + this.state.incorrect)
     }

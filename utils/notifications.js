@@ -1,19 +1,58 @@
+import { AsyncStorage } from "react-native"
 import {Notifications, Permissions} from 'expo'
 
-export const localNotification = {
-    title: 'BLA Remember to practice for your test',
-    body: 'Do your daily quiz', 
-    ios: { 
-      sound: true 
-    },
-};
+const NOTFICATION_KEY = "UdaciCards:notifcations"
 
-let noticationTime = new Date();
-noticationTime.setHours(22,0,0,0)
-noticationTime.setMinutes(21)
-console.log(noticationTime)
 
-export const schedulingOptions = {
-    time: noticationTime, // (date or number) — A Date object representing when to fire the notification or a number in Unix epoch time. Example: (new Date()).getTime() + 1000 is one second from now.
-    repeat: "day"
-};
+export function clearLocalNotifcation(){
+    return AsyncStorage.removeItem(NOTFICATION_KEY)
+    .then(Notifications.cancelAllScheduledNotificationsAsync)
+
+}
+
+export function createNotification(){
+    return {
+        title : 'Remember your quiz',
+        body: "Don't forget to practice for your test today!",
+        ios:{
+            sound: true
+        },
+        android:{
+            sound: true,
+            priority: 'high',
+            sticky: false,
+            vibrate: true
+        }
+    }
+}
+
+export function setLocalNotification(){
+    AsyncStorage.getItem(NOTFICATION_KEY)
+    .then(JSON.parse)
+    .then(data => {
+        if(data === null){
+            Permissions.askAsync(Permissions.NOTIFICATIONS)
+            .then(({status})  => {
+                if(status === 'granted'){
+                    Notifications.cancelAllScheduledNotificationsAsync()
+                    
+                    let tomorrow = new Date()
+                    tomorrow.setDate(tomorrow.getDate())
+                    tomorrow.setHours(12)
+                    tomorrow.setMinutes(18)
+
+                    Notifications.scheduleLocalNotificationAsync(
+                        createNotification(), {
+                            time: tomorrow,
+                            repeat: 'day'
+                        }
+                    )
+
+                    AsyncStorage.setItem(NOTFICATION_KEY, JSON.stringify(true))
+
+                    console.log('Set local notification set to ' + tomorrow)
+                }    
+            })
+        }
+    })
+}
