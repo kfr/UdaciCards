@@ -52,7 +52,7 @@ const initialDecklistData = {
         questions: [{
             question: '4+2',
             answer: '6',
-            correctAnswer: true
+            correctAnswer: 'true'
         },
         {
             question: '5+6',

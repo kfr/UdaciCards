@@ -15,24 +15,41 @@ class AddCard extends React.Component{
     }
     
     handleChangeQuestion = (event) => {
-        console.log(event)
         this.setState({question: event});
     }
 
     handleChangeAnswer = (event) => {
-        console.log(event)
         this.setState({answer: event});
     }
 
     handleChangeCorrectAnswer = (event) => {
-        console.log(event)
-        this.setState({correctAnswer: event});
+        this.setState({correctAnswer: event.toLowerCase()});
     }
 
     submitCard = (deck) => {
         const {question, answer, correctAnswer} = this.state;
-        console.log('SubmitCard::' + question +  answer + correctAnswer + deck)
-        this.props.dispatch(addCard(question, answer, correctAnswer, deck))
+        if(!question){
+            alert('Question cannot be empty')
+            return;
+        }
+        if(!answer){
+            alert('Answer cannot be empty')
+            return;
+        }
+        if(!correctAnswer){
+            alert('correct cannot be empty')
+            return;
+        }
+        
+        var items = ["true", "false"];
+        var found = items.filter(x => x == correctAnswer);
+        
+        if(found.length === 0){
+            alert('correctanswer must be either true or false')
+            return;
+        }
+
+        this.props.dispatch(addCard({question, answer, correctAnswer, deck}))
         addCardToDeck({deck, question, answer, correctAnswer})
         this.setState({
             question: '',
@@ -60,13 +77,13 @@ class AddCard extends React.Component{
                                onChangeText={this.handleChangeAnswer}
                                value={this.state.answer}>
                      </TextInput>
-
+                    
                     <Text style={styles.title}>Is this true or false</Text>
                     <TextInput style={styles.input}  
                           onChangeText={this.handleChangeCorrectAnswer}
                           value={this.state.correctAnswer}>
                     </TextInput>
-
+                    
                     <TouchableOpacity style={styles.submitBtn} onPress={() => this.submitCard(deck)}>
                         <Text style={styles.submitBtnText}>Add card</Text>
                     </TouchableOpacity>

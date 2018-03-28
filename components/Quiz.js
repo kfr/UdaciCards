@@ -73,7 +73,7 @@ class Quiz extends React.Component{
                 <Animated.View style={animatedStyle}>
                 <View style={styles.container}>
                     <View style={styles.card}>
-                    <Text style={styles.maintext}>Your result is: {this.state.correct} / {decks[deck].questions.length}</Text>
+                    <Text style={styles.resulttext}>Your result is: {this.state.correct} / {decks[deck].questions.length}</Text>
                     </View>
                 </View>
                 </Animated.View>
@@ -161,6 +161,12 @@ const styles = StyleSheet.create({
             marginTop: 40,
             textAlign: 'center'
       },
+      resulttext:{
+        fontSize: 20,
+        color: purple,
+        marginTop: 40,
+        textAlign: 'center'
+  },
       subtext:{
             fontSize: 20,
             color: white,
