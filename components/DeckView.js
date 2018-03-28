@@ -19,7 +19,7 @@ class DeckView extends React.Component {
             <ActionButton styles={styles} color={purple}
                         onPress={() => this.props.navigation.navigate('AddCard', {entryId:deck})} text='Add card'/>
             <ActionButton styles={styles} color={red}
-                        onPress={() => this.props.navigation.navigate('Quiz', {entryId:deck})} text='Start quiz'/>
+                        onPress={() => decks[deck].questions.length > 0 ? this.props.navigation.navigate('Quiz', {entryId:deck}): alert('Please add a card before starting a quiz')} text='Start quiz'/>
           </View>
         </View>
         )
