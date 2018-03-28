@@ -15,10 +15,17 @@ class NewDeck extends React.Component{
     }
 
     addDeck = () => {
-        saveDeck(this.state.text)
-        this.props.dispatch(addDeck(this.state.text))
-        this.props.navigation.navigate('DeckView', {entryId: this.state.text})
-        this.setState({text: ''})
+        if(this.state.text)
+        {
+            saveDeck(this.state.text)
+            this.props.dispatch(addDeck(this.state.text))
+            this.props.navigation.navigate('DeckView', {entryId: this.state.text})
+            this.setState({text: ''})
+        }
+        else
+        {
+            alert('Title cannot be empty, please add a value')
+        }
     }
 
     render(){
