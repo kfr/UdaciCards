@@ -61,6 +61,33 @@ class Quiz extends React.Component{
        }) 
     }
 
+    resetQuiz = (deck) =>{
+        
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'Quiz', params:{entryId:deck} })
+            ],
+            
+        });
+        this.props.navigation.dispatch(resetAction);
+          
+        // Or we can do this to keep navigation => this.props.navigation.navigate('Quiz', {entryId:deck})
+    }
+
+    backToDeck = (deck) => {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'DeckView', params:{entryId:deck} })
+            ],
+            
+        });
+        this.props.navigation.dispatch(resetAction);
+
+        // Or we can do this to keep navigation =>this.props.navigation.navigate('DeckView', {entryId:deck})
+    }
+
     render(){
         const {questionNumber} = this.state
         const decks = this.props.decks
@@ -76,13 +103,16 @@ class Quiz extends React.Component{
         if(questionNumber === decks[deck].questions.length)
         {
             return (
-                <Animated.View style={animatedStyle}>
                 <View style={styles.container}>
                     <View style={styles.card}>
-                    <Text style={styles.resulttext}>Your result is: {this.state.correct} / {decks[deck].questions.length}</Text>
-                    </View>
+                    <Animated.View style={animatedStyle}>
+                        <Text style={styles.resulttext}>Your result is: {this.state.correct} / {decks[deck].questions.length}</Text>
+                    </Animated.View>
+                    <ActionButton styles={styles} color={purple} onPress={() => this.backToDeck(deck)} text='Back to deck'/>
+                    <ActionButton styles={styles} color={red} onPress={() => this.resetQuiz(deck)} text='Restart Quiz'/>
+                    <ActionButton styles={styles} color={green} onPress={() => this.props.navigation.navigate('Home')} text='Decklist'/>
                 </View>
-                </Animated.View>
+                </View>
             )
 
         }
@@ -170,7 +200,7 @@ const styles = StyleSheet.create({
       resulttext:{
         fontSize: 20,
         color: purple,
-        marginTop: 40,
+        marginTop: 0,
         textAlign: 'center'
   },
       subtext:{

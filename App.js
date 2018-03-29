@@ -38,6 +38,7 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     },
   },
+  
 }, {
   navigationOptions: {
     header: null
@@ -68,7 +69,7 @@ const MainNavigator = StackNavigator({
   DeckView:{
     screen: DeckView,
     navigationOptions:{
-      title: 'Deck info',
+      title: 'Deck',
       headerTintColor: white,
       headerStyle: {
         backgroundColor : purple
@@ -88,7 +89,7 @@ const MainNavigator = StackNavigator({
   Quiz:{
     screen: Quiz,
     navigationOptions:{
-      title: 'Start Quiz',
+      title: 'Quiz',
       headerTintColor: white,
       headerStyle: {
         backgroundColor : purple
